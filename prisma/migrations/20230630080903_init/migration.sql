@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "Grid" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "rows" INTEGER NOT NULL,
+    "columns" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
