@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     const {gridName, gridRows, gridColumns} = await request.json();
 
-    // TODO: Create the grid in the database as well as the different cells.
-
     const grid = await prisma.grid.create({
         data: {
             name: gridName,
