@@ -5,6 +5,7 @@ export default function Navbar() {
     <nav className="flex gap-4 w-full bg-purple-950 p-12">
       <Link href="/">Home</Link>
       <Link href="/grids">Grids</Link>
+      <Link href="/products">Products</Link>
     </nav>
   );
 }
