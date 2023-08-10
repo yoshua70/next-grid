@@ -1,15 +1,11 @@
 import { Grid } from "@prisma/client";
 import GridCard from "./GridCard";
+import { prisma } from "@/app/lib/prisma";
 
 export const revalidate = 0;
 
 export default async function GridList() {
-  const response = await fetch("http://localhost:3000/api/grids", {
-    method: "GET",
-    cache: "no-cache",
-  });
-
-  const grids = await response.json();
+  const grids = await prisma.grid.findMany();
 
   return (
     <div className="bg-purple-800 p-12 rounded-lg">

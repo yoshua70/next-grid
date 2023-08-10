@@ -1,15 +1,11 @@
 import { Product } from "@prisma/client";
 import ProductCard from "./ProductCard";
+import { prisma } from "@/app/lib/prisma";
 
 export const revalidate = 0;
 
 export default async function ProductList() {
-  const response = await fetch("http://localhost:3000/api/products", {
-    method: "GET",
-    cache: "no-cache",
-  });
-
-  const products = await response.json();
+  const products = await prisma.product.findMany();
 
   return (
     <div className="bg-purple-800 p-12 rounded-lg">
