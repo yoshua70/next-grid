@@ -56,7 +56,12 @@ export default function GridCanvas(props: GridCanvasProps) {
       >
         {props.cells.map((row) =>
           row.map((cell) => (
-            <Cell name={cell.name} id={cell.id} occupied={cell.occupied} />
+            <Cell
+              name={cell.name}
+              id={cell.id}
+              occupied={cell.occupied}
+              key={cell.id}
+            />
           ))
         )}
       </div>
