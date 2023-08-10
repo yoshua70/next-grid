@@ -6,15 +6,27 @@ import { ChangeEvent, FormEvent, useState } from "react";
 export default function ProductCreator() {
   const router = useRouter();
 
-  const [productName, setProductName] = useState("");
+  const [productLabel, setProductLabel] = useState("");
   const [productPrice, setProductPrice] = useState(100);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { productLabel, productPrice } = Object.fromEntries(
+      new FormData(e.currentTarget)
+    );
+
+    console.log(productLabel, productPrice);
+    await fetch("http://localhost:3000/api/products", {
+      method: "POST",
+      body: JSON.stringify({ label: productLabel, price: productPrice }),
+    });
+
+    router.refresh();
   };
 
-  const handleOnProductNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setProductName(e.target.value);
+  const handleOnProductLabelChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setProductLabel(e.target.value);
   };
 
   const handleOnProductPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,19 +39,19 @@ export default function ProductCreator() {
       <form className="mt-8" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 md:flex-row">
           <div className="flex gap-4 items-center">
-            <label htmlFor="gridName">Name</label>
+            <label htmlFor="productLabel">Name</label>
             <input
-              name="gridName"
-              id="gridName"
+              name="productLabel"
+              id="productLabel"
               type="text"
               className="p-4 rounded-lg bg-purple-400 text-white"
-              placeholder="Grid Name"
-              onChange={handleOnProductNameChange}
-              value={productName}
+              placeholder="Product Name"
+              onChange={handleOnProductLabelChange}
+              value={productLabel}
             />
           </div>
           <div className="flex gap-4 items-center">
-            <label htmlFor="gridName">Price</label>
+            <label htmlFor="productPrice">Price</label>
             <input
               name="productPrice"
               id="productPrice"
