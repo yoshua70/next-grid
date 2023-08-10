@@ -6,7 +6,7 @@ export async function POST(request: Request) {
 
     const product = await prisma.product.create({
         data: {
-            label, price
+            label: label, price: Number(price)
         }
     })
 
